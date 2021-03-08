@@ -1,0 +1,48 @@
+  <div class="pt-4 ml-5 mr-5">
+        <ngrx-users-nav-bar></ngrx-users-nav-bar>
+        <ng-container pt-4 *ngIf="usersState$ | async as state" [ngSwitch]="state.dataState">
+          <ng-container *ngSwitchCase="DataState.INITIAL">
+
+            <div class="pt-3 ">
+              <span class="text-white bg-info">Inital DATA...</span>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="DataState.LOADING">
+            <div class="pt-3 text-info">
+              <span class="text-white bg-info">Loading DATA...</span>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="DataState.ERROR">
+            <div class="pt-3">
+              <span class="text-danger">{{state.errorMessage | json}}</span>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="DataState.LOADED">
+            <div class="pt-4 justify-content-center">
+              <table class="table table-hover">
+                <thead class="bg-info text-white">
+                  <tr>
+                  <th>ID</th><th>Name</th><th>UserName</th><th>Email</th><th>Pone Number</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of state.users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phone}}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+
+
+
+
+
